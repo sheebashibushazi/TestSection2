@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql_standalone:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=itemsmanagement
+    volumes:
+      - /data/mysql
+    restart: always
+  application:
+    image: doc-springboot-app
+    container_name: app-container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql_standalone
+    ports:
+      - 9090:9090
+    volumes:
+      - /data/application
