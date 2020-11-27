@@ -1,0 +1,39 @@
+server:
+  servlet:
+    context-path: /api/v1/
+
+spring:
+  profiles: development
+  datasource:
+    url: jdbc:mysql://mysql_standalone:3306/itemsmanagement
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+---
+spring:
+  profiles: production
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/itemsmanagement
+    username: root
+    password: naabashazi
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  server:
+    port: 9090
+
+
+
